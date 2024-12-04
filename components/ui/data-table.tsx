@@ -22,7 +22,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 
-import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers } from "@/lib/api/actions";
+import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers, funarAnuncios } from "@/lib/api/actions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,7 +31,8 @@ interface DataTableProps<TData, TValue> {
   aliasColumn?: string;
   pagSize?: number;
   showRequest?: boolean;
-  showForgive?: boolean; // New prop to show "Perdonar" button
+  showForgive?: boolean;
+  showReport?: boolean; // New prop to show "Reportar" button
 }
 
 export function DataTable<TData, TValue>({
@@ -41,7 +42,8 @@ export function DataTable<TData, TValue>({
   aliasColumn = "email",
   pagSize = 5,
   showRequest = false,
-  showForgive = false // Default to false
+  showForgive = false,
+  showReport = false // Default to false
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
@@ -102,6 +104,15 @@ export function DataTable<TData, TValue>({
               confirmLabel="Continuar"
               cancelLabel="Cancelar"
               onConfirm={() => forgiveUsers(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+            />
+          ) : showReport ? (
+            <ConfirmationAlert
+              triggerLabel="Reportar"
+              triggerVariant="destructive"
+              title="¿Seguro que quieres reportar estos anuncios?"
+              confirmLabel="Continuar"
+              cancelLabel="Cancelar"
+              onConfirm={() => funarAnuncios(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
             />
           ) : (
             <ConfirmationAlert

@@ -8,7 +8,7 @@ export default async function Advertisements() {
   return (
     <>
       <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={data} pagSize={10} />
+        <DataTable columns={columns} data={data} pagSize={10} showReport={true} />
       </div>
     </>
   );
