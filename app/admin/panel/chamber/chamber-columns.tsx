@@ -2,9 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { User } from "@/types/user";
+import { Chamber } from "@/types/chamber";
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Chamber>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -26,39 +26,19 @@ export const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: "rut",
-    header: "RUT",
+    accessorKey: "id",
+    header: "ID",
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
+    accessorKey: "name",
+    header: "Name",
   },
   {
-    accessorKey: "first_name",
-    header: "First Name",
+    accessorKey: "type",
+    header: "Type",
   },
   {
-    accessorKey: "last_name",
-    header: "Last Name",
-  },
-  {
-    accessorKey: "birth_date",
-    header: "Birth Date",
-  },
-  {
-    accessorKey: "gender",
-    header: "Gender",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "account_creation_date",
-    header: "Account Creation Date",
-  },
-  {
-    accessorKey: "can_be_chamber",
-    header: "Can Be Chamber",
+    accessorKey: "creation_date",
+    header: "Creation Date",
   },
 ];

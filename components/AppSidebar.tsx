@@ -58,7 +58,7 @@ const data = {
         },
         {
           title: "Chambers",
-          url: "#"
+          url: "/admin/panel/chamber"
         },
         {
           title: "Solicitudes de chambers",

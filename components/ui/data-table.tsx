@@ -22,7 +22,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 
-import { funarUsuarios, acceptChamberRequests, rejectChamberRequests } from "@/lib/endpoints_communication";
+import { funarUsuarios, acceptChamberRequests, rejectChamberRequests } from "@/lib/api/actions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
