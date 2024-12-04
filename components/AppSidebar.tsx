@@ -54,11 +54,11 @@ const data = {
       items: [
         {
           title: "Usuarios",
-          url: "#"
+          url: "/admin/panel/user"
         },
         {
           title: "Chambers",
-          url: "#"
+          url: "/admin/panel/chamber"
         },
         {
           title: "Solicitudes de chambers",
