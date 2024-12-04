@@ -4,16 +4,14 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
-export type Usuarios = {
+export type Request = {
   rut: string;
   first_name: string;
   last_name: string;
   email: string;
-  status: "Chamber" | "Usuario";
-  area: string;
 };
 
-export const columns: ColumnDef<Usuarios>[] = [
+export const columns: ColumnDef<Request>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -46,16 +44,5 @@ export const columns: ColumnDef<Usuarios>[] = [
   {
     accessorKey: "email",
     header: "Email"
-  },
-  {
-    accessorKey: "status",
-    header: "Status"
-  },
-  {
-    accessorKey: "area",
-    header: "Área",
-    meta: {
-      visible: (row: Usuarios) => row.status === "Chamber"
-    }
   }
 ];

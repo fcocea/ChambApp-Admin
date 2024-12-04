@@ -10,6 +10,7 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 
+import { ConfirmationAlert } from "@/components/ConfirmationPopUp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -24,11 +25,20 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterColumn?: string;
+  aliasColumn?: string;
+  pagSize?: number;
+  showRequest?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data
+  data,
+  filterColumn = "email",
+  aliasColumn = "email",
+  pagSize = 5,
+  showRequest = false
+
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -45,7 +55,7 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
-        pageSize: 5
+        pageSize: pagSize
       }
     },
     state: {
@@ -58,13 +68,44 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder={`Filtrar ${aliasColumn}...`}
+          value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""}
           onChange={event =>
-            table.getColumn("email")?.setFilterValue(event.target.value)}
+            table.getColumn(filterColumn)?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
-        <Button variant="destructive" className="ml-auto"> Funar </Button>
+        {showRequest
+          ? (
+              <div className="ml-auto flex space-x-2">
+                <ConfirmationAlert
+                  triggerLabel="Aceptar"
+                  title="¿Seguro que quieres realizar esta acción?"
+                  confirmLabel="Continuar"
+                  cancelLabel="Cancelar"
+                >
+                </ConfirmationAlert>
+                <ConfirmationAlert
+                  triggerLabel="Rechazar"
+                  triggerVariant="outline"
+                  title="¿Seguro que quieres realizar esta acción?"
+                  confirmLabel="Continuar"
+                  cancelLabel="Cancelar"
+                >
+                </ConfirmationAlert>
+              </div>
+            )
+          : (
+              <div className="ml-auto flex space-x-2">
+                <ConfirmationAlert
+                  triggerLabel="Funar"
+                  triggerVariant="destructive"
+                  title="¿Seguro que quieres realizar esta acción?"
+                  confirmLabel="Continuar"
+                  cancelLabel="Cancelar"
+                >
+                </ConfirmationAlert>
+              </div>
+            )}
       </div>
       <div className="rounded-md border">
         <Table>

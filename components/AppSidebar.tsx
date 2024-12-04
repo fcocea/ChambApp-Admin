@@ -58,11 +58,11 @@ const data = {
         },
         {
           title: "Chambers",
-          url: "/admin/panel/chamber"
+          url: "#"
         },
         {
           title: "Solicitudes de chambers",
-          url: "#"
+          url: "/admin/panel/chamber-request"
         },
         {
           title: "Usuarios suspendidos",
@@ -77,7 +77,7 @@ const data = {
       items: [
         {
           title: "Publicaciones activas",
-          url: "#"
+          url: "/admin/panel/advertisement"
         },
         {
           title: "Publicaciones completadas",
