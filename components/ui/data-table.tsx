@@ -22,6 +22,8 @@ import {
   TableRow
 } from "@/components/ui/table";
 
+import { funarUsuarios, acceptChamberRequests, rejectChamberRequests } from "@/lib/endpoints_communication";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -81,6 +83,7 @@ export function DataTable<TData, TValue>({
                 title="¿Seguro que quieres realizar esta acción?"
                 confirmLabel="Continuar"
                 cancelLabel="Cancelar"
+                onConfirm={() => acceptChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
               />
               <ConfirmationAlert
                 triggerLabel="Rechazar"
@@ -88,6 +91,7 @@ export function DataTable<TData, TValue>({
                 title="¿Seguro que quieres realizar esta acción?"
                 confirmLabel="Continuar"
                 cancelLabel="Cancelar"
+                onConfirm={() => rejectChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
               />
             </>
           ) : (
@@ -97,6 +101,7 @@ export function DataTable<TData, TValue>({
               title="¿Seguro que quieres realizar esta acción?"
               confirmLabel="Continuar"
               cancelLabel="Cancelar"
+              onConfirm={() => funarUsuarios(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
             />
           )}
         </div>
@@ -152,6 +157,7 @@ export function DataTable<TData, TValue>({
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className={!table.getCanPreviousPage() ? "opacity-50 cursor-not-allowed" : ""}
         >
           Anterior
         </Button>
@@ -160,6 +166,7 @@ export function DataTable<TData, TValue>({
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className={!table.getCanNextPage() ? "opacity-50 cursor-not-allowed" : ""}
         >
           Siguiente
         </Button>
