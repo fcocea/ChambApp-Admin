@@ -31,14 +31,14 @@ export const columns: ColumnDef<Chamber>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nombre",
   },
   {
     accessorKey: "type",
-    header: "Type",
+    header: "Tipo",
   },
   {
     accessorKey: "creation_date",
-    header: "Creation Date",
+    header: "Fecha de creación",
   },
 ];

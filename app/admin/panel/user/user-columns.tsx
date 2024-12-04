@@ -14,14 +14,14 @@ export const columns: ColumnDef<User>[] = [
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label="Seleccionar todo"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label="Seleccionar fila"
       />
     ),
   },
@@ -31,34 +31,30 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "phone",
-    header: "Phone",
+    header: "Teléfono",
   },
   {
     accessorKey: "first_name",
-    header: "First Name",
+    header: "Nombre",
   },
   {
     accessorKey: "last_name",
-    header: "Last Name",
+    header: "Apellido",
   },
   {
     accessorKey: "birth_date",
-    header: "Birth Date",
+    header: "Fecha de Nacimiento",
   },
   {
     accessorKey: "gender",
-    header: "Gender",
+    header: "Género",
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: "Correo Electrónico",
   },
   {
     accessorKey: "account_creation_date",
-    header: "Account Creation Date",
-  },
-  {
-    accessorKey: "can_be_chamber",
-    header: "Can Be Chamber",
+    header: "Fecha de Creación",
   },
 ];
