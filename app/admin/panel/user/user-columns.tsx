@@ -6,11 +6,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export type Usuarios = {
   rut: string;
+  phone: string;
   first_name: string;
   last_name: string;
+  password: string;
+  birth_date: Date;
+  gender: string;
   email: string;
-  status: "Chamber" | "Usuario";
-  area: string;
+  account_creation_date: Date;
+  can_be_chamber: boolean;
 };
 
 export const columns: ColumnDef<Usuarios>[] = [
@@ -23,39 +27,39 @@ export const columns: ColumnDef<Usuarios>[] = [
           || (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label="Seleccionar todo"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={value => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label="Seleccionar fila"
       />
     )
   },
   {
     accessorKey: "rut",
-    header: "Rut"
+    header: "RUT"
   },
   {
-    id: "name",
-    header: "Nombre",
-    cell: ({ row }) => `${row.original.first_name} ${row.original.last_name}`
+    accessorKey: "first_name",
+    header: "Nombre"
+  },
+  {
+    accessorKey: "last_name",
+    header: "Apellido"
   },
   {
     accessorKey: "email",
-    header: "Email"
+    header: "Correo Electrónico"
   },
   {
-    accessorKey: "status",
-    header: "Status"
+    accessorKey: "phone",
+    header: "Teléfono"
   },
   {
-    accessorKey: "area",
-    header: "Área",
-    meta: {
-      visible: (row: Usuarios) => row.status === "Chamber"
-    }
+    accessorKey: "birth_date",
+    header: "Fecha de Nacimiento"
   }
 ];
