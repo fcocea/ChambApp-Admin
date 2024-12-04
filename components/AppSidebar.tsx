@@ -54,7 +54,7 @@ const data = {
       items: [
         {
           title: "Usuarios",
-          url: "#"
+          url: "/admin/panel/users"
         },
         {
           title: "Chambers",
