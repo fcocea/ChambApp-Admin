@@ -49,3 +49,23 @@ export async function getAdvertisements(): Promise<Advertisement[]> {
 
   return advertisements;
 }
+
+export async function getReportedAdvertisements(): Promise<Advertisement[]> {
+    const advertisements: Advertisement[] = Array.from({ length: 20 }, (_, i) => {
+        const creationDate = getRandomDate(new Date(2023, 0, 1), new Date(2023, 11, 31));
+        const startDate = getRandomDate(new Date(2024, 0, 1), new Date(2024, 11, 31));
+
+        return {
+            ad_id: `ad_${i + 1}`,
+            title: titles[i % titles.length],
+            description: descriptions[i % descriptions.length],
+            status: statuses[Math.floor(Math.random() * statuses.length)],
+            price: Math.floor(Math.random() * 10000 + 100),
+            start_date: formatDate(startDate),
+            creation_date: formatDate(creationDate),
+            created_by: createdBy[i % createdBy.length]
+        };
+        });
+
+        return advertisements;
+    }

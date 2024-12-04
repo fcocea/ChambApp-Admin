@@ -22,7 +22,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 
-import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers, funarAnuncios } from "@/lib/api/actions";
+import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers, funarAnuncios, reactivateAdvertisements } from "@/lib/api/actions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,7 +32,8 @@ interface DataTableProps<TData, TValue> {
   pagSize?: number;
   showRequest?: boolean;
   showForgive?: boolean;
-  showReport?: boolean; // New prop to show "Reportar" button
+  showReport?: boolean;
+  showReactivate?: boolean; // New prop to show "Reactivar" button
 }
 
 export function DataTable<TData, TValue>({
@@ -43,7 +44,8 @@ export function DataTable<TData, TValue>({
   pagSize = 5,
   showRequest = false,
   showForgive = false,
-  showReport = false // Default to false
+  showReport = false,
+  showReactivate = false // Default to false
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
@@ -113,6 +115,15 @@ export function DataTable<TData, TValue>({
               confirmLabel="Continuar"
               cancelLabel="Cancelar"
               onConfirm={() => funarAnuncios(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
+            />
+          ) : showReactivate ? (
+            <ConfirmationAlert
+              triggerLabel="Reactivar"
+              triggerVariant="primary"
+              title="¿Seguro que quieres reactivar estos anuncios?"
+              confirmLabel="Continuar"
+              cancelLabel="Cancelar"
+              onConfirm={() => reactivateAdvertisements(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
             />
           ) : (
             <ConfirmationAlert

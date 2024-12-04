@@ -85,7 +85,7 @@ const data = {
         },
         {
           title: "Anuncios reportados",
-          url: "#"
+          url: "/admin/panel/reported"
         }
       ]
     }
