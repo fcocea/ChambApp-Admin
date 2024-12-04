@@ -80,7 +80,7 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
         <div className="ml-auto flex space-x-2">
-          {showRequest ? (
+                    {showRequest ? (
             <>
               <ConfirmationAlert
                 triggerLabel="Aceptar"
@@ -101,7 +101,7 @@ export function DataTable<TData, TValue>({
           ) : showForgive ? (
             <ConfirmationAlert
               triggerLabel="Perdonar"
-              triggerVariant="primary"
+              triggerVariant="blue"
               title="¿Seguro que quieres perdonar a estos usuarios?"
               confirmLabel="Continuar"
               cancelLabel="Cancelar"
@@ -119,7 +119,7 @@ export function DataTable<TData, TValue>({
           ) : showReactivate ? (
             <ConfirmationAlert
               triggerLabel="Reactivar"
-              triggerVariant="primary"
+              triggerVariant="blue"
               title="¿Seguro que quieres reactivar estos anuncios?"
               confirmLabel="Continuar"
               cancelLabel="Cancelar"
