@@ -6,6 +6,11 @@ export async function funarUsuarios(userIds: string[]): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
+export async function funarAnuncios(announcementIds: string[]): Promise<void> {
+  alert(`Funando anuncios con IDs: ${announcementIds.join(", ")}`);
+  return new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
 export async function acceptChamberRequests(chamberIds: string[]): Promise<void> {
   alert(`Aceptando solicitudes de chambers con IDs: ${chamberIds.join(", ")}`);
   return new Promise((resolve) => setTimeout(resolve, 1000));
