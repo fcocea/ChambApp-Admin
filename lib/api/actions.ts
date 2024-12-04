@@ -15,3 +15,8 @@ export async function rejectChamberRequests(chamberIds: string[]): Promise<void>
   alert(`Rechazando solicitudes de chambers con IDs: ${chamberIds.join(", ")}`);
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
+
+export async function forgiveUsers(userIds: string[]): Promise<void> {
+  alert(`Perdonando usuarios con IDs: ${userIds.join(", ")}`);
+  return new Promise((resolve) => setTimeout(resolve, 1000));
+}

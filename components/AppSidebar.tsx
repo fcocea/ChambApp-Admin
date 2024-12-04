@@ -66,7 +66,7 @@ const data = {
         },
         {
           title: "Usuarios suspendidos",
-          url: "#"
+          url: "/admin/panel/suspended"
         }
       ]
     },

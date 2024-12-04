@@ -22,7 +22,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 
-import { funarUsuarios, acceptChamberRequests, rejectChamberRequests } from "@/lib/api/actions";
+import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers } from "@/lib/api/actions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +31,7 @@ interface DataTableProps<TData, TValue> {
   aliasColumn?: string;
   pagSize?: number;
   showRequest?: boolean;
+  showForgive?: boolean; // New prop to show "Perdonar" button
 }
 
 export function DataTable<TData, TValue>({
@@ -39,11 +40,10 @@ export function DataTable<TData, TValue>({
   filterColumn = "email",
   aliasColumn = "email",
   pagSize = 5,
-  showRequest = false
+  showRequest = false,
+  showForgive = false // Default to false
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
@@ -94,6 +94,15 @@ export function DataTable<TData, TValue>({
                 onConfirm={() => rejectChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
               />
             </>
+          ) : showForgive ? (
+            <ConfirmationAlert
+              triggerLabel="Perdonar"
+              triggerVariant="primary"
+              title="¿Seguro que quieres perdonar a estos usuarios?"
+              confirmLabel="Continuar"
+              cancelLabel="Cancelar"
+              onConfirm={() => forgiveUsers(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+            />
           ) : (
             <ConfirmationAlert
               triggerLabel="Funar"
