@@ -14,10 +14,11 @@ export const formatDate = (date: Date): string => {
 
 export const mapStatus = (status: number): string => {
   const statusMap: { [key: number]: string } = {
-    0: "peticion",
-    1: "aceptado",
-    2: "finalizado",
-    3: "cancelado"
+    0: "Petición",
+    1: "Aceptado",
+    2: "Finalizado",
+    3: "Cancelado",
+    4: "Funao"
   };
 
   return statusMap[status] ?? "desconocido";
