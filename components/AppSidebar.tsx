@@ -27,26 +27,26 @@ const data = {
     avatar: "/avatars/shadcn.jpg"
   },
   navMain: [
-    {
-      title: "Panel de control",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "Resumen general",
-          url: "/admin/panel/overview"
-        },
-        {
-          title: "Estadísticas en tiempo real",
-          url: "#"
-        },
-        {
-          title: "Actividad reciente",
-          url: "#"
-        }
-      ]
-    },
+    //    {
+    //      title: "Panel de control",
+    //      url: "#",
+    //      icon: SquareTerminal,
+    //      isActive: true,
+    //      items: [
+    //        {
+    //          title: "Resumen general",
+    //          url: "/admin/panel/overvie"
+    //        },
+    //        {
+    //          title: "Estadísticas en tiempo real",
+    //          url: "#"
+    //        },
+    //        {
+    //          title: "Actividad reciente",
+    //          url: "#"
+    //        }
+    //      ]
+    //    },
     {
       title: "Gestión de usuarios",
       url: "#",
@@ -56,13 +56,14 @@ const data = {
           title: "Usuarios",
           url: "/admin/panel/user"
         },
-        {
-          title: "Solicitudes de chambers",
-          url: "/admin/panel/chamber-request"
-        },
+
         {
           title: "Usuarios suspendidos",
           url: "/admin/panel/suspended"
+        },
+        {
+          title: "Solicitudes de chambers",
+          url: "/admin/panel/chamber-request"
         }
       ]
     },
@@ -72,13 +73,13 @@ const data = {
       icon: Megaphone,
       items: [
         {
-          title: "Publicaciones activas",
+          title: "Publicaciones",
           url: "/admin/panel/advertisement"
         },
-        {
-          title: "Publicaciones completadas",
-          url: "#"
-        },
+        //        {
+        //          title: "Publicaciones completadas",
+        //          url: "#"
+        //        },
         {
           title: "Anuncios reportados",
           url: "/admin/panel/reported"
