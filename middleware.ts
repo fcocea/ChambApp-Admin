@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
 
   if (pathname === "/admin" || pathname === "/") {
     const url = request.nextUrl.clone();
-    url.pathname = "admin/panel/user";
+    url.pathname = "admin/panel/overview";
     return NextResponse.redirect(url);
   }
 
