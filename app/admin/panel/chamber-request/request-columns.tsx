@@ -37,12 +37,15 @@ export const columns: ColumnDef<Request>[] = [
     header: "Rut"
   },
   {
-    id: "name",
-    header: "Nombre",
-    cell: ({ row }) => `${row.original.first_name} ${row.original.last_name}`
+    accessorKey: "first_name",
+    header: "Nombre"
+  },
+  {
+    accessorKey: "last_name",
+    header: "Apellido"
   },
   {
     accessorKey: "email",
-    header: "Email"
+    header: "Correo Electrónico"
   }
 ];

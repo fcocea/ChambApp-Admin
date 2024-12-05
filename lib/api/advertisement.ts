@@ -1,5 +1,5 @@
+import { formatDate, mapStatus } from "@/lib/utils";
 import { Advertisement } from "@/types/advertisement";
-import { formatDate } from "@/lib/utils";
 
 const titles = [
   "Venta de casa", "Auto en perfecto estado", "Servicios de jardinería",
@@ -34,12 +34,12 @@ export async function getAdvertisements(): Promise<Advertisement[]> {
   const advertisements: Advertisement[] = Array.from({ length: 20 }, (_, i) => {
     const creationDate = getRandomDate(new Date(2023, 0, 1), new Date(2023, 11, 31));
     const startDate = getRandomDate(new Date(2024, 0, 1), new Date(2024, 11, 31));
-
+    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
     return {
       ad_id: `ad_${i + 1}`,
       title: titles[i % titles.length],
       description: descriptions[i % descriptions.length],
-      status: statuses[Math.floor(Math.random() * statuses.length)],
+      status: mapStatus(randomStatus),
       price: Math.floor(Math.random() * 10000 + 100),
       start_date: formatDate(startDate),
       creation_date: formatDate(creationDate),
@@ -51,21 +51,21 @@ export async function getAdvertisements(): Promise<Advertisement[]> {
 }
 
 export async function getReportedAdvertisements(): Promise<Advertisement[]> {
-    const advertisements: Advertisement[] = Array.from({ length: 20 }, (_, i) => {
-        const creationDate = getRandomDate(new Date(2023, 0, 1), new Date(2023, 11, 31));
-        const startDate = getRandomDate(new Date(2024, 0, 1), new Date(2024, 11, 31));
+  const advertisements: Advertisement[] = Array.from({ length: 20 }, (_, i) => {
+    const creationDate = getRandomDate(new Date(2023, 0, 1), new Date(2023, 11, 31));
+    const startDate = getRandomDate(new Date(2024, 0, 1), new Date(2024, 11, 31));
+    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+    return {
+      ad_id: `ad_${i + 1}`,
+      title: titles[i % titles.length],
+      description: descriptions[i % descriptions.length],
+      status: mapStatus(randomStatus),
+      price: Math.floor(Math.random() * 10000 + 100),
+      start_date: formatDate(startDate),
+      creation_date: formatDate(creationDate),
+      created_by: createdBy[i % createdBy.length]
+    };
+  });
 
-        return {
-            ad_id: `ad_${i + 1}`,
-            title: titles[i % titles.length],
-            description: descriptions[i % descriptions.length],
-            status: statuses[Math.floor(Math.random() * statuses.length)],
-            price: Math.floor(Math.random() * 10000 + 100),
-            start_date: formatDate(startDate),
-            creation_date: formatDate(creationDate),
-            created_by: createdBy[i % createdBy.length]
-        };
-        });
-
-        return advertisements;
-    }
+  return advertisements;
+}

@@ -21,8 +21,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-
-import { funarUsuarios, acceptChamberRequests, rejectChamberRequests, forgiveUsers, funarAnuncios, reactivateAdvertisements } from "@/lib/api/actions";
+import { acceptChamberRequests, forgiveUsers, funarAnuncios, funarUsuarios, reactivateAdvertisements, rejectChamberRequests } from "@/lib/api/actions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -80,61 +79,69 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
         <div className="ml-auto flex space-x-2">
-                    {showRequest ? (
-            <>
-              <ConfirmationAlert
-                triggerLabel="Aceptar"
-                title="¿Seguro que quieres realizar esta acción?"
-                confirmLabel="Continuar"
-                cancelLabel="Cancelar"
-                onConfirm={() => acceptChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
-              />
-              <ConfirmationAlert
-                triggerLabel="Rechazar"
-                triggerVariant="outline"
-                title="¿Seguro que quieres realizar esta acción?"
-                confirmLabel="Continuar"
-                cancelLabel="Cancelar"
-                onConfirm={() => rejectChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
-              />
-            </>
-          ) : showForgive ? (
-            <ConfirmationAlert
-              triggerLabel="Perdonar"
-              triggerVariant="blue"
-              title="¿Seguro que quieres perdonar a estos usuarios?"
-              confirmLabel="Continuar"
-              cancelLabel="Cancelar"
-              onConfirm={() => forgiveUsers(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
-            />
-          ) : showReport ? (
-            <ConfirmationAlert
-              triggerLabel="Reportar"
-              triggerVariant="destructive"
-              title="¿Seguro que quieres reportar estos anuncios?"
-              confirmLabel="Continuar"
-              cancelLabel="Cancelar"
-              onConfirm={() => funarAnuncios(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
-            />
-          ) : showReactivate ? (
-            <ConfirmationAlert
-              triggerLabel="Reactivar"
-              triggerVariant="blue"
-              title="¿Seguro que quieres reactivar estos anuncios?"
-              confirmLabel="Continuar"
-              cancelLabel="Cancelar"
-              onConfirm={() => reactivateAdvertisements(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
-            />
-          ) : (
-            <ConfirmationAlert
-              triggerLabel="Funar"
-              triggerVariant="destructive"
-              title="¿Seguro que quieres realizar esta acción?"
-              confirmLabel="Continuar"
-              cancelLabel="Cancelar"
-              onConfirm={() => funarUsuarios(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
-            />
-          )}
+          {showRequest
+            ? (
+                <>
+                  <ConfirmationAlert
+                    triggerLabel="Aceptar"
+                    title="¿Seguro que quieres realizar esta acción?"
+                    confirmLabel="Continuar"
+                    cancelLabel="Cancelar"
+                    onConfirm={() => acceptChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+                  />
+                  <ConfirmationAlert
+                    triggerLabel="Rechazar"
+                    triggerVariant="outline"
+                    title="¿Seguro que quieres realizar esta acción?"
+                    confirmLabel="Continuar"
+                    cancelLabel="Cancelar"
+                    onConfirm={() => rejectChamberRequests(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+                  />
+                </>
+              )
+            : showForgive
+              ? (
+                  <ConfirmationAlert
+                    triggerLabel="Perdonar"
+                    triggerVariant="blue"
+                    title="¿Seguro que quieres perdonar a estos usuarios?"
+                    confirmLabel="Continuar"
+                    cancelLabel="Cancelar"
+                    onConfirm={() => forgiveUsers(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+                  />
+                )
+              : showReport
+                ? (
+                    <ConfirmationAlert
+                      triggerLabel="Reportar"
+                      triggerVariant="destructive"
+                      title="¿Seguro que quieres reportar estos anuncios?"
+                      confirmLabel="Continuar"
+                      cancelLabel="Cancelar"
+                      onConfirm={() => funarAnuncios(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
+                    />
+                  )
+                : showReactivate
+                  ? (
+                      <ConfirmationAlert
+                        triggerLabel="Reactivar"
+                        triggerVariant="blue"
+                        title="¿Seguro que quieres reactivar estos anuncios?"
+                        confirmLabel="Continuar"
+                        cancelLabel="Cancelar"
+                        onConfirm={() => reactivateAdvertisements(table.getFilteredSelectedRowModel().rows.map(row => row.original.ad_id))}
+                      />
+                    )
+                  : (
+                      <ConfirmationAlert
+                        triggerLabel="Funar"
+                        triggerVariant="destructive"
+                        title="¿Seguro que quieres realizar esta acción?"
+                        confirmLabel="Continuar"
+                        cancelLabel="Cancelar"
+                        onConfirm={() => funarUsuarios(table.getFilteredSelectedRowModel().rows.map(row => row.original.rut))}
+                      />
+                    )}
         </div>
       </div>
       <div className="rounded-md border">
@@ -147,41 +154,49 @@ export function DataTable<TData, TValue>({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </TableHead>
                 ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className="p-2">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            {table.getRowModel().rows?.length
+              ? (
+                  table.getRowModel().rows.map(row => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map(cell => (
+                        <TableCell key={cell.id} className="p-2">
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                )
+              : (
+                  <TableRow>
+                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                      No results.
                     </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
+                  </TableRow>
+                )}
           </TableBody>
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} de {table.getFilteredRowModel().rows.length} filas seleccionadas.
+          {table.getFilteredSelectedRowModel().rows.length}
+          {" "}
+          de
+          {" "}
+          {table.getFilteredRowModel().rows.length}
+          {" "}
+          filas seleccionadas.
         </div>
         <Button
           variant="outline"

@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+
 import { Checkbox } from "@/components/ui/checkbox";
 
 export type Advertisement = {
@@ -69,6 +70,6 @@ export const columns: ColumnDef<Advertisement>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status"
+    header: "Estado"
   }
 ];

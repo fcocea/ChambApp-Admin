@@ -1,7 +1,8 @@
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "../user/user-columns";
-import { User } from "@/types/user";
 import { getSuspendedUsers } from "@/lib/api/user";
+import { User } from "@/types/user";
+
+import { columns } from "../user/user-columns";
 
 export default async function SuspendedUsersData() {
   const data = await getSuspendedUsers();

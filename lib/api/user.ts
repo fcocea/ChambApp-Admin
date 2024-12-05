@@ -17,8 +17,9 @@ export async function getAllUsers(): Promise<User[]> {
     const email = `${first_name.toLowerCase()}.${last_name.toLowerCase()}@example.com`;
     const account_creation_date = formatDate(new Date());
     const can_be_chamber = i % 2 === 0;
+    const funado = i % 3 === 0;
 
-    return { rut, phone, first_name, last_name, password, birth_date, gender, email, account_creation_date, can_be_chamber };
+    return { rut, phone, first_name, last_name, password, birth_date, gender, email, account_creation_date, can_be_chamber, funado };
   });
 
   return users;

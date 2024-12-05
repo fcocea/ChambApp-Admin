@@ -1,6 +1,7 @@
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./reported-columns";
 import { getReportedAdvertisements } from "@/lib/api/advertisement";
+
+import { columns } from "./reported-columns";
 
 export default async function ReportedAdvertisements() {
   const data = await getReportedAdvertisements();
@@ -8,7 +9,7 @@ export default async function ReportedAdvertisements() {
   return (
     <>
       <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={data} pagSize={10} showReactivate={true} />
+        <DataTable columns={columns} data={data} pagSize={10} showReactivate={true} filterColumn="ad_id" aliasColumn="ID" />
       </div>
     </>
   );

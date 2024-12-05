@@ -12,3 +12,13 @@ export const formatDate = (date: Date): string => {
   return `${dd}/${mm}/${yy}`;
 };
 
+export const mapStatus = (status: number): string => {
+  const statusMap: { [key: number]: string } = {
+    0: "peticion",
+    1: "aceptado",
+    2: "finalizado",
+    3: "cancelado"
+  };
+
+  return statusMap[status] ?? "desconocido";
+};

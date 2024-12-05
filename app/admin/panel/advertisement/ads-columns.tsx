@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+
 import { Checkbox } from "@/components/ui/checkbox";
 
 export type Advertisement = {
@@ -44,14 +45,6 @@ export const columns: ColumnDef<Advertisement>[] = [
     header: "Título"
   },
   {
-    accessorKey: "description",
-    header: "Descripción"
-  },
-  {
-    accessorKey: "status",
-    header: "Estado"
-  },
-  {
     accessorKey: "price",
     header: () => <div className="text-right">Precio</div>,
     cell: ({ row }) => {
@@ -75,5 +68,9 @@ export const columns: ColumnDef<Advertisement>[] = [
   {
     accessorKey: "created_by",
     header: "Creado por"
+  },
+  {
+    accessorKey: "status",
+    header: "Estado"
   }
 ];

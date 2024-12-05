@@ -35,7 +35,7 @@ const data = {
       items: [
         {
           title: "Resumen general",
-          url: "#"
+          url: "/admin/panel/overview"
         },
         {
           title: "Estadísticas en tiempo real",
@@ -55,10 +55,6 @@ const data = {
         {
           title: "Usuarios",
           url: "/admin/panel/user"
-        },
-        {
-          title: "Chambers",
-          url: "/admin/panel/chamber"
         },
         {
           title: "Solicitudes de chambers",
