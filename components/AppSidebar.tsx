@@ -27,26 +27,18 @@ const data = {
     avatar: "/avatars/shadcn.jpg"
   },
   navMain: [
-    //    {
-    //      title: "Panel de control",
-    //      url: "#",
-    //      icon: SquareTerminal,
-    //      isActive: true,
-    //      items: [
-    //        {
-    //          title: "Resumen general",
-    //          url: "/admin/panel/overvie"
-    //        },
-    //        {
-    //          title: "Estadísticas en tiempo real",
-    //          url: "#"
-    //        },
-    //        {
-    //          title: "Actividad reciente",
-    //          url: "#"
-    //        }
-    //      ]
-    //    },
+       {
+         title: "Panel de control",
+         url: "#",
+         icon: SquareTerminal,
+         isActive: true,
+         items: [
+           {
+             title: "Resumen general",
+             url: "/admin/panel/overview"
+           }
+          ]
+       },
     {
       title: "Gestión de usuarios",
       url: "#",
