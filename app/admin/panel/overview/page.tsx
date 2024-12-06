@@ -1,62 +1,49 @@
-import OverviewChart from "@/components/ui/overview-chart";
-import { getAllUsers } from "@/lib/api/user";
+import { BarChartData } from "@/components/BarChart";
+import { PieChartData } from "@/components/PieChartData";
+
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
+
+export function CardUsers({ title, value }: { title: string; value: number }) {
+  return (
+    <div className="p-4 bg-white shadow rounded-lg">
+      <h2 className="text-xl font-semibold mb-2">{title}</h2>
+      <p className="text-xl font-semibold">{value}</p>
+    </div>
+  );
+}
 
 export default async function OverviewPage() {
-  const users = await getAllUsers();
+  const response = await fetch(`${API_ENDPOINT}/users`);
+  const users = await response.json();
 
-  const funados = users.filter(user => user.funado).length;
+  const funados = users.filter((user: any) => !user.is_active).length;
   const noFunados = users.length - funados;
-  const chambers = users.filter(user => user.can_be_chamber).length;
+  const chambers = users.filter((user: any) => user.can_be_chamber).length;
   const nochambers = users.length - chambers;
 
-  const Funadosdata = [
-    { name: "Funados", value: funados, color: "#FF6384" },
-    { name: "No Funados", value: noFunados, color: "#36A2EB" }
+  const dataFunados = [
+    { name: "Inactivos", value: funados, fill: "#181a1b" },
+    { name: "Activos", value: noFunados, fill: "#2580c1" }
   ];
 
-  const Chamberdata = [
-    { name: "Chambers", value: chambers, color: "#FF6384" },
-    { name: "No Chambers", value: nochambers, color: "#36A2EB" }
+  const dataChamber = [
+    { name: "Chambers", value: chambers, fill: "#181a1b" },
+    { name: "No Chambers", value: nochambers, fill: "#2580c1" }
   ];
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-4">¡Bienvenido de nuevo!</h1>
-      <p className="mb-4">Aquí puedes ver un resumen general de la plataforma.</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-4 bg-white shadow rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Usuarios Funados</h2>
-          <p className="text-xl  text-gray-600">
-            {funados}
-          </p>
+    <div className="container mx-auto px-5 py-10 flex flex-col gap-4">
+      <h1 className="text-2xl font-bold">¡Bienvenido de nuevo!</h1>
+
+      <div className="flex flex-row justify-around gap-4">
+        <div className="w-full">
+          <PieChartData title="Chamber vs No Chambers" data={dataChamber} />
         </div>
-        <div className="p-4 bg-white shadow rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Usuarios Chambers</h2>
-          <p className=" text-xl text-gray-600">
-            {chambers}
-          </p>
-        </div>
-        <div className="p-4 bg-white shadow rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Usuarios No Funados</h2>
-          <p className="text-xl text-gray-600">
-            {noFunados}
-          </p>
-        </div>
-        <div className="p-4 bg-white shadow rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Usuarios No Chambers</h2>
-          <p className="text-xl text-gray-600">
-            {nochambers}
-          </p>
+        <div className="w-full">
+          <PieChartData title="Activo vs Inactivos" data={dataFunados} />
         </div>
       </div>
-      <div className="flex flex-row justify-around">
-        <div className="mb-8">
-          <OverviewChart data={Funadosdata} />
-        </div>
-        <div className="mb-8">
-          <OverviewChart data={Chamberdata} />
-        </div>
-      </div>
+      <BarChartData />
     </div>
   );
 }

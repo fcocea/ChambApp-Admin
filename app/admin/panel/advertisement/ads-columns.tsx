@@ -3,17 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Checkbox } from "@/components/ui/checkbox";
-
-export type Advertisement = {
-  ad_id: string;
-  title: string;
-  description: string;
-  status: number;
-  price: number;
-  start_date: string;
-  creation_date: string;
-  created_by: string;
-};
+import { Advertisement } from "@/types/advertisement";
 
 export const columns: ColumnDef<Advertisement>[] = [
   {
@@ -24,17 +14,37 @@ export const columns: ColumnDef<Advertisement>[] = [
           table.getIsAllPageRowsSelected()
           || (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={value => {
+          console.log(value);
+          const isChecked = value;
+          table.getRowModel().rows.forEach(row => {
+            const status = row.getValue("status");
+            if (status === "Petición") {
+              row.toggleSelected();
+            }
+          });
+        }}
         aria-label="Select all"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={value => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    )
+    cell: ({ row }) => {
+      const status = row.getValue("status");
+      return status === "Petición"
+        ? (
+            <Checkbox
+              checked={row.getIsSelected()}
+              onCheckedChange={value => row.toggleSelected(!!value)}
+              aria-label="Select row"
+            />
+          )
+        : (
+            <Checkbox
+              checked={false}
+              disabled
+              aria-label="Select row"
+            />
+          );
+    }
   },
   {
     accessorKey: "ad_id",

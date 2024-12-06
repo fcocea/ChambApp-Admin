@@ -1,7 +1,8 @@
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./user-columns";
-import { User } from "@/types/user";
 import { getAllUsers } from "@/lib/api/user";
+import { User } from "@/types/user";
+
+import { columns } from "./user-columns";
 
 export default async function UsuariosData() {
   const data = await getAllUsers();

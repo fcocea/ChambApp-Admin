@@ -27,18 +27,18 @@ const data = {
     avatar: "/avatars/shadcn.jpg"
   },
   navMain: [
-       {
-         title: "Panel de control",
-         url: "#",
-         icon: SquareTerminal,
-         isActive: true,
-         items: [
-           {
-             title: "Resumen general",
-             url: "/admin/panel/overview"
-           }
-          ]
-       },
+    {
+      title: "Panel de control",
+      url: "#",
+      icon: SquareTerminal,
+      isActive: true,
+      items: [
+        {
+          title: "Resumen general",
+          url: "/admin/panel/overview"
+        }
+      ]
+    },
     {
       title: "Gestión de usuarios",
       url: "#",
@@ -52,11 +52,11 @@ const data = {
         {
           title: "Usuarios suspendidos",
           url: "/admin/panel/suspended"
-        },
-        {
-          title: "Solicitudes de chambers",
-          url: "/admin/panel/chamber-request"
         }
+        // {
+        //   title: "Solicitudes de chambers",
+        //   url: "/admin/panel/chamber-request"
+        // }
       ]
     },
     {
